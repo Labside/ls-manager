@@ -1,4 +1,4 @@
-ls-manager
-==========
+Labside Manager
+===============
 
-WordPress Plugin To Manage Business
+Optimized CRM For My Business - WordPress Plugin
