@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Herve THOMAS <herve.thomas@labside.fr>\n"
+"Language-Team: LABSIDE <herve.thomas@labside.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: __;_e\n"
+
+msgid "Labside Manager"
+msgstr "Labside Gestionnaire"
+
+msgid "Hello"
+msgstr "Bonjour"
+
+# : Custom Post Types Generals
+msgid "Edit"
+msgstr "Editer"
+
+msgid "Parent"
+msgstr "Parent"
+
+# : Custom Post Type Partner
+msgid "Partners listing"
+msgstr "Liste des partenaires"
+
+msgid "Partners"
+msgstr "Partenaires"
+
+msgid "Partner"
+msgstr "Partenaire"
+
+msgid "New partner"
+msgstr "Nouveau partenaire"
+
+msgid "Add a new partner"
+msgstr "Ajouter un partenaire"
+
+msgid "Edit partner"
+msgstr "Editer le partenaire"
+
+msgid "View partner"
+msgstr "Voir le partenaire"
+
+msgid "Search partner"
+msgstr "Chercher un partenaire"
+
+msgid "No partner found"
+msgstr "Aucun partenaire trouvé"
+
+msgid "No partner found in trash"
+msgstr "Aucun partenaire trouvé dans la corbeille"
+
+# : Custom Post Type Project
+msgid "Projects listing"
+msgstr "Liste des projets"
+
+msgid "Projects"
+msgstr "Projets"
+
+msgid "Project"
+msgstr "Projet"
+
+msgid "New project"
+msgstr "Nouveau projet"
+
+msgid "Add a new project"
+msgstr "Ajouter un projet"
+
+msgid "Edit project"
+msgstr "Editer le projet"
+
+msgid "View project"
+msgstr "Voir le projet"
+
+msgid "Search project"
+msgstr "Chercher un projet"
+
+msgid "No project found"
+msgstr "Aucun projet trouvé"
+
+msgid "No project found in trash"
+msgstr "Aucun projet trouvé dans la corbeille"

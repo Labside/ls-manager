@@ -22,4 +22,24 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-?>
+
+/* Define constants */
+define( 'LS_MANAGER_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__) );
+define( 'LS_MANAGER_PLUGIN_DIR_URL',  plugin_dir_url(__FILE__) );
+
+include( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-core.php');
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'core/post-types.php' );
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/partner.php' );
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/project.php' );
+
+/**
+ *  Labside Manager Instance 
+ */
+if (class_exists('LS_Manager')) {
+    
+	global $ls_manager;
+        
+        // Instanciation 
+	$ls_manager = new LS_Manager(__FILE__);
+        
+}
