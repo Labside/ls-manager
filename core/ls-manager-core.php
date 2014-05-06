@@ -7,8 +7,8 @@ if (!class_exists('LS_Manager')) {
     class LS_Manager {
         
         
-        static $ls_manager_version    = '0.1'; // Version
-        var $ls_manager_domain        = 'lsmanager'; // Domain
+        static $ls_manager_version    = '0.1';         // Version
+        var $ls_manager_domain        = 'lsmanager';   // Domain
         var $options_group            = 'ls_manager_'; // Prefix to all options
         
 	public $ls_manager_settings   = null;

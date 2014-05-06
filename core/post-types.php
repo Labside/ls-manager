@@ -12,8 +12,14 @@ if (!class_exists('LS_Manager_Post_Types')) {
          */ 
         public function __construct() {
             
+            // Create Custom Taxonomy
+            $this->create_taxonomies();
+            
             // Create Custom Post Types
             $this->create_post_types();
+            
+            // Add Taxonomy Filter : Types
+            add_action( 'restrict_manage_posts', array(&$this, 'partner_taxonomy_filter_dropdownlist') );
             
         }
         
@@ -44,7 +50,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
             );
             
             register_post_type( 
-                'project', 
+                'partner', 
                 array(  'labels' => $labels,
                         'description'         => __('Partners listing',$ls_manager->ls_manager_domain),
                         'public'              => true, 
@@ -54,7 +60,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
                         'menu_position'       => 25, 
                         'query_var'           => true,
                         'supports'            => array( 'title', 'editor', 'thumbnail' ), 
-                        'taxonomies'          => array('category'),
+                        'taxonomies'          => array('type'),
                         'rewrite'             => true, 
                         'capability_type'     => 'post', 
                         'hierachical'         => false,
@@ -80,7 +86,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
             );
             
             register_post_type( 
-                'partner', 
+                'project', 
                 array(  'labels' => $labels,
                         'description' => __('Projects listing',$ls_manager->ls_manager_domain), 
                         'public' => true, 
@@ -98,6 +104,87 @@ if (!class_exists('LS_Manager_Post_Types')) {
                 )
             );
             
+        }
+    
+        /**
+         * Create Specifics Custom Taxonomies
+         * @global type $ls_manager 
+         */
+        private function create_taxonomies(){
+            
+            global $ls_manager;
+            
+            // Add Taxonomy "Type", hierarchical (like categories)
+            $labels = array(
+                    'name'              => __('Types',$ls_manager->ls_manager_domain),
+                    'singular_name'     => __('Type',$ls_manager->ls_manager_domain),
+                    'search_items'      => __('Find a type',$ls_manager->ls_manager_domain),
+                    'all_items'         => __('All types',$ls_manager->ls_manager_domain),
+                    'parent_item'       => __('Parent type',$ls_manager->ls_manager_domain),
+                    'parent_item_colon' => __('Parent types :',$ls_manager->ls_manager_domain),
+                    'edit_item'         => __('Edit type',$ls_manager->ls_manager_domain),
+                    'update_item'       => __('Update type',$ls_manager->ls_manager_domain),
+                    'add_new_item'      => __('Add new type',$ls_manager->ls_manager_domain),
+                    'new_item_name'     => __('New type',$ls_manager->ls_manager_domain),
+                    'menu_name'         => __('Types',$ls_manager->ls_manager_domain),
+            );
+
+            $args = array(
+                    'hierarchical'      => true,
+                    'labels'            => $labels,
+                    'show_ui'           => true,
+                    'show_admin_column' => true,
+                    'query_var'         => true,
+                    'rewrite'           => array( 'slug' => 'partners', 'with_front' => false ),
+            );
+            register_taxonomy( 'type', array( 'partner' ), $args );
+        }
+    
+        /**
+         * Custom Taxonomy "Type" Filters Dropdown List ("Partners" Page List)
+         */
+        public function partner_taxonomy_filter_dropdownlist(){
+            
+            global $wp_query, $ls_manager;
+            
+            $type_slug_walker = new Type_Slug_Walker;
+            $screen = get_current_screen();
+            
+            if ( $screen->post_type == 'partner' ) {
+                wp_dropdown_categories( array(
+                    'show_option_all' => __('See all types',$ls_manager->ls_manager_domain),
+                    'taxonomy' => 'type',
+                    'name' => 'type',
+                    'orderby' => 'name',
+                    'selected' => ( isset( $wp_query->query['type'] ) ? $wp_query->query['type'] : '' ),
+                    'hierarchical' => true,
+                    'depth' => 0,
+                    'show_count' => true,
+                    'hide_empty' => false,
+                    'walker' => $type_slug_walker
+                ) );
+            }
+        }
+    }
+
+    /**
+    * Override Walker Category DropDown : Use Slug As Value In Options 
+    */
+    class Type_Slug_Walker extends Walker_CategoryDropdown {   
+        /**
+        * Override start_el native function
+        */
+        function start_el( &$output, $category, $depth, $args, $id = 0 ) {
+
+            $pad = str_repeat('&nbsp;', $depth * 3);
+            $output .= "\t<option class=\"level-$depth\" value=\"".$category->slug."\"";
+            if ( $category->term_id == $args['selected'] )
+                $output .= ' selected="selected"';
+            $output .= '>';
+            $output .= $pad.$category->name;
+            if ( $args['show_count'] )
+                $output .= '&nbsp;&nbsp;('. $category->count .')';
+            $output .= "</option>\n";
         }
     }
 }

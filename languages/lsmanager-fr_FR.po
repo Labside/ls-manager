@@ -14,8 +14,39 @@ msgstr ""
 msgid "Labside Manager"
 msgstr "Labside Gestionnaire"
 
-msgid "Hello"
-msgstr "Bonjour"
+# : Custom Taxonomies Generals
+msgid "Types"
+msgstr "Types"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Find a type"
+msgstr "Rechercher un type"
+
+msgid "All types"
+msgstr "Tout les types"
+
+msgid "Parent type"
+msgstr "Type parent"
+
+msgid "Parent types :"
+msgstr "Types parents :"
+
+msgid "Edit type"
+msgstr "Editer le type"
+
+msgid "Update type"
+msgstr "Mettre à jour le type"
+
+msgid "Add new type"
+msgstr "Ajouter un type"
+
+msgid "New type"
+msgstr "Nouveau type"
+
+msgid "See all types"
+msgstr "Voir tous les types"
 
 # : Custom Post Types Generals
 msgid "Edit"
@@ -54,6 +85,24 @@ msgstr "Aucun partenaire trouvé"
 
 msgid "No partner found in trash"
 msgstr "Aucun partenaire trouvé dans la corbeille"
+
+msgid "Summary"
+msgstr "Résumé"
+
+msgid "Owner"
+msgstr "Propriétaire"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Zip Code"
+msgstr "Code Postal"
+
+msgid "City"
+msgstr "Ville"
+
+msgid "Phone"
+msgstr "Téléphone"
 
 # : Custom Post Type Project
 msgid "Projects listing"
