@@ -1,8 +1,8 @@
 <?php
 /**
- *  Plugin Name: Labside Manager
+ *  Plugin Name: Freelance Manager
  *  Plugin URI: http://labside.fr
- *  Description: Optimized CRM For My Business
+ *  Description: Simple CRM For Freelancer
  *  Version: 0.1
  *  Author: <a href="http://labside.fr" target="_blank">Hervé THOMAS - Labside</a>
  */
@@ -31,6 +31,8 @@ include( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-core.php');
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'core/post-types.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/partner.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/project.php' );
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/prospect.php' );
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/customer.php' );
 
 /**
  *  Labside Manager Instance 
