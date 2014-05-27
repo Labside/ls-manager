@@ -16,17 +16,17 @@ if (!class_exists('LS_Manager_Project')) {
         }
         
         public function admin_project_init(){
-            // Partner Infos MetaBox + Save Data
+            // Project Infos MetaBox + Save Data
             add_meta_box('project-infos-box', 'Informations détaillées', array(&$this,'project_infos_render'), 'project', 'normal', 'high');
             add_action('save_post', array(&$this,'project_infos_save_postdata'));
         }
         
-        public function partner_infos_render(){
-            
+        public function project_infos_render(){
+            echo 'ICI';
         }
         
-        public function partner_infos_save_postdata($post_id){
-            
+        public function project_infos_save_postdata($post_id){
+            return $post_id;            
         }
     }
 }

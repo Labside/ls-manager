@@ -66,6 +66,7 @@ if (!class_exists('LS_Manager_Partner')) {
             $partner_attribut_address      = get_post_meta($post->ID, 'partner-attribut-address', true);
             $partner_attribut_zip_code     = get_post_meta($post->ID, 'partner-attribut-zip-code', true);
             $partner_attribut_city         = get_post_meta($post->ID, 'partner-attribut-city', true);
+            $partner_attribut_country      = get_post_meta($post->ID, 'partner-attribut-country', true);
             $partner_attribut_phone        = get_post_meta($post->ID, 'partner-attribut-phone', true);
             $partner_attribut_phone2       = get_post_meta($post->ID, 'partner-attribut-phone2', true);
             $partner_attribut_phone3       = get_post_meta($post->ID, 'partner-attribut-phone3', true);
@@ -76,8 +77,8 @@ if (!class_exists('LS_Manager_Partner')) {
             $partner_attribut_latitude     = get_post_meta($post->ID, 'partner-attribut-latitude', true);
             $partner_attribut_longitude    = get_post_meta($post->ID, 'partner-attribut-longitude', true);
             
-            // Use nonce for verification
-            echo wp_nonce_field('partner_attributs_metabox_submit','partner_attributs_metabox_nonce');
+            // Use nonce for verification            
+            echo '<input type="hidden" name="partner_attributs_metabox_nonce" value="'. wp_create_nonce('partner_attributs_metabox'). '" />';
 
             // Owner
             echo '<label style="width:25%;display:block;float:left;">'.__('Owner', $ls_manager->ls_manager_domain).'</label>';
@@ -94,6 +95,10 @@ if (!class_exists('LS_Manager_Partner')) {
             // City
             echo '<label style="width:25%;display:block;float:left;">'.__('City', $ls_manager->ls_manager_domain).'</label>';
             echo '<input type="text" name="partner-attribut-city" id="partner-attribut-city" value="'.$partner_attribut_city.'" style="width:70%;" /><br />';
+            
+            // Country
+            echo '<label style="width:25%;display:block;float:left;">'.__('Country', $ls_manager->ls_manager_domain).'</label>';
+            echo '<input type="text" name="partner-attribut-country" id="partner-attribut-city" value="'.$partner_attribut_country.'" style="width:70%;" /><br />';
 
             // Telephone
             echo '<label style="width:25%;display:block;float:left;">'.__('Phone', $ls_manager->ls_manager_domain).'</label>';
@@ -140,7 +145,7 @@ if (!class_exists('LS_Manager_Partner')) {
         public function partner_attributs_save_postdata($post_id){
             
             // Check Nonce
-            if (empty($_POST) || !check_admin_referer('partner_attributs_metabox_submit', 'partner_attributs_metabox_nonce'))
+            if (!wp_verify_nonce($_POST['partner_attributs_metabox_nonce'], 'partner_attributs_metabox'))
                 return $post_id;
 
             // Check Autosave
@@ -165,6 +170,11 @@ if (!class_exists('LS_Manager_Partner')) {
             $partner_attribut_city = sanitize_text_field($_POST['partner-attribut-city']);
             if (!empty($partner_attribut_city)) update_post_meta ($post_id, 'partner-attribut-city', $partner_attribut_city);
             else update_post_meta ($post_id, 'partner-attribut-city', '');
+            
+            // Update Partner Attribut : Country
+            $partner_attribut_country = sanitize_text_field($_POST['partner-attribut-country']);
+            if (!empty($partner_attribut_country)) update_post_meta ($post_id, 'partner-attribut-country', $partner_attribut_country);
+            else update_post_meta ($post_id, 'partner-attribut-country', '');
             
             // Update Partner Attribut : Phone
             $partner_attribut_phone = sanitize_text_field($_POST['partner-attribut-phone']);
@@ -252,6 +262,7 @@ if (!class_exists('LS_Manager_Partner')) {
                     $partner_attribut_address      = get_post_meta($post_id, 'partner-attribut-address', true);
                     $partner_attribut_zip_code     = get_post_meta($post_id, 'partner-attribut-zip-code', true);
                     $partner_attribut_city         = get_post_meta($post_id, 'partner-attribut-city', true);
+                    $partner_attribut_country      = get_post_meta($post_id, 'partner-attribut-country', true);
                     $partner_attribut_phone        = get_post_meta($post_id, 'partner-attribut-phone', true);
                     $partner_attribut_email        = get_post_meta($post_id, 'partner-attribut-email', true);
                     // Display Partenaire Summary
@@ -259,6 +270,8 @@ if (!class_exists('LS_Manager_Partner')) {
                         echo $partner_attribut_owner . '<br />';
                     if (!empty($partner_attribut_address) && !empty($partner_attribut_zip_code) && !empty($partner_attribut_city))
                         echo $partner_attribut_address . '<br />' . $partner_attribut_zip_code . ' ' . $partner_attribut_city . '<br />';
+                    if (!empty($partner_attribut_country))
+                        echo $partner_attribut_country . '<br />';
                     if (!empty($partner_attribut_phone))
                         echo $partner_attribut_phone . '<br />';
                     if (!empty($partner_attribut_email))
