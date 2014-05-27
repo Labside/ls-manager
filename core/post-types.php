@@ -69,7 +69,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
             );
             
             // Post Type : Project
-            $labels = array(
+            /*$labels = array(
                 'name'               => __('Projects',$ls_manager->ls_manager_domain),
                 'singular_name'      => __('Project',$ls_manager->ls_manager_domain), 
                 'add_new'            => __('New project',$ls_manager->ls_manager_domain),
@@ -93,7 +93,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
                         'publicly_queryable' => true,
                         'show_ui' => true, 
                         'exclude_from_search' => false, 
-                        'menu_position' => 25, 
+                        'menu_position' => 26, 
                         'query_var' => true,
                         'supports' => array( 'title', 'author', 'editor', 'excerpt', 'thumbnail' ), 
                         'taxonomies' => array('category'),
@@ -101,6 +101,78 @@ if (!class_exists('LS_Manager_Post_Types')) {
                         'capability_type' => 'post', 
                         'hierachical' => false,
                         'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-project.png',
+                )
+            );*/
+            
+            // Post Type : Prospect
+            $labels = array(
+                'name'               => __('Prospects',$ls_manager->ls_manager_domain),
+                'singular_name'      => __('Prospect',$ls_manager->ls_manager_domain), 
+                'add_new'            => __('New prospect',$ls_manager->ls_manager_domain),
+                'add_new_item'       => __('Add a new prospect',$ls_manager->ls_manager_domain), 
+                'edit'               => __('Edit',$ls_manager->ls_manager_domain), 
+                'edit_item'          => __('Edit prospect',$ls_manager->ls_manager_domain),
+                'new_item'           => __('New prospect',$ls_manager->ls_manager_domain), 
+                'view'               => __('Prospects',$ls_manager->ls_manager_domain), 
+                'view_item'          => __('View prospect',$ls_manager->ls_manager_domain),
+                'search_items'       => __('Search prospect',$ls_manager->ls_manager_domain),
+                'not_found'          => __('No prospect found',$ls_manager->ls_manager_domain), 
+                'not_found_in_trash' => __('No prospect found in trash',$ls_manager->ls_manager_domain),
+                'parent'             => __('Parent',$ls_manager->ls_manager_domain)
+            );
+            
+            register_post_type( 
+                'prospect', 
+                array(  'labels' => $labels,
+                        'description' => __('Prospects listing',$ls_manager->ls_manager_domain), 
+                        'public' => true, 
+                        'publicly_queryable' => true,
+                        'show_ui' => true, 
+                        'exclude_from_search' => false, 
+                        'menu_position' => 26, 
+                        'query_var' => true,
+                        'supports' => array( 'title', 'editor', 'thumbnail' ), 
+                        'taxonomies' => array(),
+                        'rewrite' => true, 
+                        'capability_type' => 'post', 
+                        'hierachical' => false,
+                        'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-prospect.png',
+                )
+            );
+            
+            // Post Type : Customer
+            $labels = array(
+                'name'               => __('Customers',$ls_manager->ls_manager_domain),
+                'singular_name'      => __('Customer',$ls_manager->ls_manager_domain), 
+                'add_new'            => __('New customer',$ls_manager->ls_manager_domain),
+                'add_new_item'       => __('Add a new customer',$ls_manager->ls_manager_domain), 
+                'edit'               => __('Edit',$ls_manager->ls_manager_domain), 
+                'edit_item'          => __('Edit customer',$ls_manager->ls_manager_domain),
+                'new_item'           => __('New customer',$ls_manager->ls_manager_domain), 
+                'view'               => __('Customers',$ls_manager->ls_manager_domain), 
+                'view_item'          => __('View customer',$ls_manager->ls_manager_domain),
+                'search_items'       => __('Search customer',$ls_manager->ls_manager_domain),
+                'not_found'          => __('No customer found',$ls_manager->ls_manager_domain), 
+                'not_found_in_trash' => __('No customer found in trash',$ls_manager->ls_manager_domain),
+                'parent'             => __('Parent',$ls_manager->ls_manager_domain)
+            );
+            
+            register_post_type( 
+                'customer', 
+                array(  'labels' => $labels,
+                        'description' => __('Customers listing',$ls_manager->ls_manager_domain), 
+                        'public' => true, 
+                        'publicly_queryable' => true,
+                        'show_ui' => true, 
+                        'exclude_from_search' => false, 
+                        'menu_position' => 25, 
+                        'query_var' => true,
+                        'supports' => array( 'title', 'editor', 'thumbnail' ), 
+                        'taxonomies' => array(),
+                        'rewrite' => true, 
+                        'capability_type' => 'post', 
+                        'hierachical' => false,
+                        'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-customer.png',
                 )
             );
             
