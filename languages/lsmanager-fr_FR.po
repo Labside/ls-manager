@@ -101,8 +101,103 @@ msgstr "Code Postal"
 msgid "City"
 msgstr "Ville"
 
+msgid "Country"
+msgstr "Pays"
+
 msgid "Phone"
 msgstr "Téléphone"
+
+# : Custom Post Type Prospect
+msgid "Prospects listing"
+msgstr "Liste des prospections"
+
+msgid "Prospects"
+msgstr "Prospections"
+
+msgid "Prospect"
+msgstr "Prospection"
+
+msgid "New prospect"
+msgstr "Nouvelle prospection"
+
+msgid "Add a new prospect"
+msgstr "Ajouter une prospection"
+
+msgid "Edit prospect"
+msgstr "Editer la prospection"
+
+msgid "View prospect"
+msgstr "Voir la prospection"
+
+msgid "Search prospect"
+msgstr "Chercher une prospection"
+
+msgid "No prospect found"
+msgstr "Aucune prospection trouvée"
+
+msgid "No prospect found in trash"
+msgstr "Aucun prospection trouvée dans la corbeille"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Prospect Status"
+msgstr "Statut du prospect"
+
+msgid "In progress"
+msgstr "En cours"
+
+msgid "Call again"
+msgstr "Relancer"
+
+msgid "Quote sended"
+msgstr "Devis envoyé"
+
+msgid "Futur customer"
+msgstr "Futur client"
+
+msgid "Transformation"
+msgstr "Transformation"
+
+msgid "Transform prospect into customer ?"
+msgstr "Transformer le prospect en client ?"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+# : Custom Post Type Customer
+msgid "Customers listing"
+msgstr "Liste des clients"
+
+msgid "Customers"
+msgstr "Clients"
+
+msgid "Customer"
+msgstr "Client"
+
+msgid "New customer"
+msgstr "Nouveau client"
+
+msgid "Add a new customer"
+msgstr "Ajouter un client"
+
+msgid "Edit customer"
+msgstr "Editer le client"
+
+msgid "View customer"
+msgstr "Voir le client"
+
+msgid "Search customer"
+msgstr "Chercher un client"
+
+msgid "No customer found"
+msgstr "Aucun client trouvé"
+
+msgid "No customer found in trash"
+msgstr "Aucun client trouvé dans la corbeille"
 
 # : Custom Post Type Project
 msgid "Projects listing"
