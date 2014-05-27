@@ -15,6 +15,8 @@ if (!class_exists('LS_Manager')) {
         public $ls_manager_post_types = null;
         public $ls_manager_partner    = null;
         public $ls_manager_project    = null;
+        public $ls_manager_prospect   = null;
+        public $ls_manager_customer   = null;
         
         /** 
          * Construct the plugin main object 
@@ -32,8 +34,8 @@ if (!class_exists('LS_Manager')) {
             );
             
             // Install and Uninstall Hooks 
-            register_activation_hook($ls_manager_globals['plugin_file'], array($this, 'activate')); 
-            register_deactivation_hook($ls_manager_globals['plugin_file'], array($this, 'deactivate'));
+            register_activation_hook($ls_manager_globals['plugin_file'], array(&$this, 'activate')); 
+            register_deactivation_hook($ls_manager_globals['plugin_file'], array(&$this, 'deactivate'));
                         
             // Load Loacalization File
             load_plugin_textdomain($this->ls_manager_domain, false,  $ls_manager_globals['plugin_dir_name'] . '/languages');
@@ -52,8 +54,17 @@ if (!class_exists('LS_Manager')) {
             // Load Partenaire Post Type
             $this->ls_manager_partner    = new LS_Manager_Partner();
             
+            // Load Project Post Type
+            //$this->ls_manager_project    = new LS_Manager_Project();
+            
+            // Load Prospect Post Type
+            $this->ls_manager_prospect    = new LS_Manager_Prospect();
+            
+            // Load Customer Post Type
+            $this->ls_manager_customer    = new LS_Manager_Customer();
+            
             // Load Js Files
-            add_action('admin_enqueue_scripts',array($this,'admin_js'));
+            add_action('admin_enqueue_scripts',array(&$this,'admin_js'));
             
             
         } // END public function init()
@@ -61,13 +72,13 @@ if (!class_exists('LS_Manager')) {
         public function admin_init(){
             
             // Hide Core Update
-            add_action( 'admin_notices', array($this, 'hide_update_notice_to_all_but_admin_users'), 1 );
+            add_action( 'admin_notices', array(&$this, 'hide_update_notice_to_all_but_admin_users'), 1 );
             
             // Add Body Class
-            add_filter('admin_body_class', array($this, 'add_custom_admin_body_class'));
+            add_filter('admin_body_class', array(&$this, 'add_custom_admin_body_class'));
             
             // Add Support Of Upload File On Edit Forms
-            add_action('post_edit_form_tag', array($this,'update_edit_form'));
+            add_action('post_edit_form_tag', array(&$this,'update_edit_form'));
                         
         } // END public function admin_init()
         
