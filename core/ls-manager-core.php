@@ -13,6 +13,7 @@ if (!class_exists('LS_Manager')) {
         
 	public $ls_manager_settings   = null;
         public $ls_manager_post_types = null;
+        public $ls_manager_enterprise = null;
         public $ls_manager_partner    = null;
         public $ls_manager_project    = null;
         public $ls_manager_prospect   = null;
@@ -51,7 +52,10 @@ if (!class_exists('LS_Manager')) {
             // Load Post Types Builder
             $this->ls_manager_post_types = new LS_Manager_Post_Types();
             
-            // Load Partenaire Post Type
+            // Load Enterprise Post Type
+            $this->ls_manager_enterprise = new LS_Manager_Enterprise();
+            
+            // Load Partner Post Type
             $this->ls_manager_partner    = new LS_Manager_Partner();
             
             // Load Project Post Type
