@@ -20,9 +20,9 @@ if (!class_exists('LS_Manager_Partner')) {
          */
         public function admin_partner_init(){
             
-            // Partner Infos MetaBox + Save Data
-            add_meta_box('partner-infos-box', 'Informations détaillées', array(&$this,'partner_attributs_render'), 'partner', 'normal', 'high');
-            add_action('save_post', array(&$this,'partner_attributs_save_postdata'));
+            // Partner Properties MetaBox + Save Data
+            add_meta_box('partner-infos-box', 'Informations détaillées', array(&$this,'partner_properties_render'), 'partner', 'normal', 'high');
+            add_action('save_post', array(&$this,'partner_properties_save_postdata'));
             
             // Partner Custom Columns In Post Type List
             add_filter( 'manage_edit-partner_columns', array(&$this,'partner_add_columns') ) ;
@@ -55,175 +55,175 @@ if (!class_exists('LS_Manager_Partner')) {
         }
         
         /**
-         * Render Meta Box : Partner Attributs
+         * Render Meta Box : Partner Properties
          */
-        public function partner_attributs_render(){
+        public function partner_properties_render(){
             
             global $ls_manager, $post;
             
             // Get Post Meta Key 
-            $partner_attribut_owner        = get_post_meta($post->ID, 'partner-attribut-owner', true);
-            $partner_attribut_address      = get_post_meta($post->ID, 'partner-attribut-address', true);
-            $partner_attribut_zip_code     = get_post_meta($post->ID, 'partner-attribut-zip-code', true);
-            $partner_attribut_city         = get_post_meta($post->ID, 'partner-attribut-city', true);
-            $partner_attribut_country      = get_post_meta($post->ID, 'partner-attribut-country', true);
-            $partner_attribut_phone        = get_post_meta($post->ID, 'partner-attribut-phone', true);
-            $partner_attribut_phone2       = get_post_meta($post->ID, 'partner-attribut-phone2', true);
-            $partner_attribut_phone3       = get_post_meta($post->ID, 'partner-attribut-phone3', true);
-            $partner_attribut_fax          = get_post_meta($post->ID, 'partner-attribut-fax', true);
-            $partner_attribut_email        = get_post_meta($post->ID, 'partner-attribut-email', true);
-            $partner_attribut_email2       = get_post_meta($post->ID, 'partner-attribut-email2', true);
-            $partner_attribut_website      = get_post_meta($post->ID, 'partner-attribut-website', true);
-            $partner_attribut_latitude     = get_post_meta($post->ID, 'partner-attribut-latitude', true);
-            $partner_attribut_longitude    = get_post_meta($post->ID, 'partner-attribut-longitude', true);
+            $partner_property_owner        = get_post_meta($post->ID, 'property-owner', true);
+            $partner_property_address      = get_post_meta($post->ID, 'property-address', true);
+            $partner_property_zip_code     = get_post_meta($post->ID, 'property-zip-code', true);
+            $partner_property_city         = get_post_meta($post->ID, 'property-city', true);
+            $partner_property_country      = get_post_meta($post->ID, 'property-country', true);
+            $partner_property_phone        = get_post_meta($post->ID, 'property-phone', true);
+            $partner_property_phone2       = get_post_meta($post->ID, 'property-phone2', true);
+            $partner_property_phone3       = get_post_meta($post->ID, 'property-phone3', true);
+            $partner_property_fax          = get_post_meta($post->ID, 'property-fax', true);
+            $partner_property_email        = get_post_meta($post->ID, 'property-email', true);
+            $partner_property_email2       = get_post_meta($post->ID, 'property-email2', true);
+            $partner_property_website      = get_post_meta($post->ID, 'property-website', true);
+            $partner_property_latitude     = get_post_meta($post->ID, 'property-latitude', true);
+            $partner_property_longitude    = get_post_meta($post->ID, 'property-longitude', true);
             
             // Use nonce for verification            
-            echo '<input type="hidden" name="partner_attributs_metabox_nonce" value="'. wp_create_nonce('partner_attributs_metabox'). '" />';
+            echo '<input type="hidden" name="partner_properties_metabox_nonce" value="'. wp_create_nonce('partner_properties_metabox'). '" />';
 
             // Owner
             echo '<label style="width:25%;display:block;float:left;">'.__('Owner', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-owner" id="partner-attribut-owner" value="'.$partner_attribut_owner.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-owner" id="property-owner" value="'.$partner_property_owner.'" style="width:70%;" /><br />';
             
             // Adresse
             echo '<label style="width:25%;display:block;float:left;">'.__('Address', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-address" id="partner-attribut-address" value="'.$partner_attribut_address.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-address" id="property-address" value="'.$partner_property_address.'" style="width:70%;" /><br />';
             
             // Zip Code
             echo '<label style="width:25%;display:block;float:left;">'.__('Zip Code', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-zip-code" id="partner-attribut-zip-code" value="'.$partner_attribut_zip_code.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-zip-code" id="property-zip-code" value="'.$partner_property_zip_code.'" style="width:70%;" /><br />';
             
             // City
             echo '<label style="width:25%;display:block;float:left;">'.__('City', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-city" id="partner-attribut-city" value="'.$partner_attribut_city.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-city" id="property-city" value="'.$partner_property_city.'" style="width:70%;" /><br />';
             
             // Country
             echo '<label style="width:25%;display:block;float:left;">'.__('Country', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-country" id="partner-attribut-city" value="'.$partner_attribut_country.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-country" id="property-city" value="'.$partner_property_country.'" style="width:70%;" /><br />';
 
             // Telephone
             echo '<label style="width:25%;display:block;float:left;">'.__('Phone', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-phone" id="partner-attribut-phone" value="'.$partner_attribut_phone.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-phone" id="property-phone" value="'.$partner_property_phone.'" style="width:70%;" /><br />';
 
             // Telephone 2
             echo '<label style="width:25%;display:block;float:left;">'.__('Phone', $ls_manager->ls_manager_domain).' 2</label>';
-            echo '<input type="text" name="partner-attribut-phone2" id="partner-attribut-phone2" value="'.$partner_attribut_phone2.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-phone2" id="property-phone2" value="'.$partner_property_phone2.'" style="width:70%;" /><br />';
 
             // Telephone 3
             echo '<label style="width:25%;display:block;float:left;">'.__('Phone', $ls_manager->ls_manager_domain).' 3</label>';
-            echo '<input type="text" name="partner-attribut-phone3" id="partner-attribut-phone3" value="'.$partner_attribut_phone3.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-phone3" id="property-phone3" value="'.$partner_property_phone3.'" style="width:70%;" /><br />';
 
             // Fax
             echo '<label style="width:25%;display:block;float:left;">'.__('Fax', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-fax" id="partner-attribut-fax" value="'.$partner_attribut_fax.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-fax" id="property-fax" value="'.$partner_property_fax.'" style="width:70%;" /><br />';
 
             // Email
             echo '<label style="width:25%;display:block;float:left;">'.__('Email', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-email" id="partner-attribut-email" value="'.$partner_attribut_email.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-email" id="property-email" value="'.$partner_property_email.'" style="width:70%;" /><br />';
 
             // Email 2
             echo '<label style="width:25%;display:block;float:left;">'.__('Email', $ls_manager->ls_manager_domain).' 2</label>';
-            echo '<input type="text" name="partner-attribut-email2" id="partner-attribut-email2" value="'.$partner_attribut_email2.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-email2" id="property-email2" value="'.$partner_property_email2.'" style="width:70%;" /><br />';
 
             // Website
             echo '<label style="width:25%;display:block;float:left;">'.__('Website', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-website" id="partner-attribut-website" value="'.$partner_attribut_website.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-website" id="property-website" value="'.$partner_property_website.'" style="width:70%;" /><br />';
             
             // Latitude
             echo '<label style="width:25%;display:block;float:left;">'.__('Latitude', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-latitude" id="partner-attribut-latitude" value="'.$partner_attribut_latitude.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-latitude" id="property-latitude" value="'.$partner_property_latitude.'" style="width:70%;" /><br />';
 
             // Longitude
             echo '<label style="width:25%;display:block;float:left;">'.__('Longitude', $ls_manager->ls_manager_domain).'</label>';
-            echo '<input type="text" name="partner-attribut-longitude" id="partner-attribut-longitude" value="'.$partner_attribut_longitude.'" style="width:70%;" /><br />';
+            echo '<input type="text" name="property-longitude" id="property-longitude" value="'.$partner_property_longitude.'" style="width:70%;" /><br />';
             echo '<em><a href="http://universimmedia.pagesperso-orange.fr/geo/loc.htm" target="_blank">Cliquez ici</a> pour obtenir obtenir les coordonnées</em><br />';
         }
         
         /**
-         * Save PostData : Partner Attributs
+         * Save PostData : Partner Properties
          * @param type $post_id
          */
-        public function partner_attributs_save_postdata($post_id){
+        public function partner_properties_save_postdata($post_id){
             
             // Check Nonce
-            if (!wp_verify_nonce($_POST['partner_attributs_metabox_nonce'], 'partner_attributs_metabox'))
+            if (!wp_verify_nonce($_POST['partner_properties_metabox_nonce'], 'partner_properties_metabox'))
                 return $post_id;
 
             // Check Autosave
             if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
             
             // Update Partner Attribut : Owner
-            $partner_attribut_owner = sanitize_text_field($_POST['partner-attribut-owner']);
-            if (!empty($partner_attribut_owner)) update_post_meta ($post_id, 'partner-attribut-owner', $partner_attribut_owner);
-            else update_post_meta ($post_id, 'partner-attribut-owner', '');
+            $partner_property_owner = sanitize_text_field($_POST['property-owner']);
+            if (!empty($partner_property_owner)) update_post_meta ($post_id, 'property-owner', $partner_property_owner);
+            else update_post_meta ($post_id, 'property-owner', '');
             
             // Update Partner Attribut : Address
-            $partner_attribut_address = sanitize_text_field($_POST['partner-attribut-address']);
-            if (!empty($partner_attribut_address)) update_post_meta ($post_id, 'partner-attribut-address', $partner_attribut_address);
-            else update_post_meta ($post_id, 'partner-attribut-address', '');
+            $partner_property_address = sanitize_text_field($_POST['property-address']);
+            if (!empty($partner_property_address)) update_post_meta ($post_id, 'property-address', $partner_property_address);
+            else update_post_meta ($post_id, 'property-address', '');
             
             // Update Partner Attribut : Zip Code
-            $partner_attribut_zip_code = sanitize_text_field($_POST['partner-attribut-zip-code']);
-            if (!empty($partner_attribut_zip_code)) update_post_meta ($post_id, 'partner-attribut-zip-code', $partner_attribut_zip_code);
-            else update_post_meta ($post_id, 'partner-attribut-zip-code', '');
+            $partner_property_zip_code = sanitize_text_field($_POST['property-zip-code']);
+            if (!empty($partner_property_zip_code)) update_post_meta ($post_id, 'property-zip-code', $partner_property_zip_code);
+            else update_post_meta ($post_id, 'property-zip-code', '');
             
             // Update Partner Attribut : City
-            $partner_attribut_city = sanitize_text_field($_POST['partner-attribut-city']);
-            if (!empty($partner_attribut_city)) update_post_meta ($post_id, 'partner-attribut-city', $partner_attribut_city);
-            else update_post_meta ($post_id, 'partner-attribut-city', '');
+            $partner_property_city = sanitize_text_field($_POST['property-city']);
+            if (!empty($partner_property_city)) update_post_meta ($post_id, 'property-city', $partner_property_city);
+            else update_post_meta ($post_id, 'property-city', '');
             
             // Update Partner Attribut : Country
-            $partner_attribut_country = sanitize_text_field($_POST['partner-attribut-country']);
-            if (!empty($partner_attribut_country)) update_post_meta ($post_id, 'partner-attribut-country', $partner_attribut_country);
-            else update_post_meta ($post_id, 'partner-attribut-country', '');
+            $partner_property_country = sanitize_text_field($_POST['property-country']);
+            if (!empty($partner_property_country)) update_post_meta ($post_id, 'property-country', $partner_property_country);
+            else update_post_meta ($post_id, 'property-country', '');
             
             // Update Partner Attribut : Phone
-            $partner_attribut_phone = sanitize_text_field($_POST['partner-attribut-phone']);
-            if (!empty($partner_attribut_phone)) update_post_meta ($post_id, 'partner-attribut-phone', $partner_attribut_phone);
-            else update_post_meta ($post_id, 'partner-attribut-phone', '');
+            $partner_property_phone = sanitize_text_field($_POST['property-phone']);
+            if (!empty($partner_property_phone)) update_post_meta ($post_id, 'property-phone', $partner_property_phone);
+            else update_post_meta ($post_id, 'property-phone', '');
             
             // Update Partner Attribut : Phone 2
-            $partner_attribut_phone2 = sanitize_text_field($_POST['partner-attribut-phone2']);
-            if (!empty($partner_attribut_phone2)) update_post_meta ($post_id, 'partner-attribut-phone2', $partner_attribut_phone2);
-            else update_post_meta ($post_id, 'partner-attribut-phone2', '');
+            $partner_property_phone2 = sanitize_text_field($_POST['property-phone2']);
+            if (!empty($partner_property_phone2)) update_post_meta ($post_id, 'property-phone2', $partner_property_phone2);
+            else update_post_meta ($post_id, 'property-phone2', '');
             
             // Update Partner Attribut : Phone 3
-            $partner_attribut_phone3 = sanitize_text_field($_POST['partner-attribut-phone3']);
-            if (!empty($partner_attribut_phone3)) update_post_meta ($post_id, 'partner-attribut-phone3', $partner_attribut_phone3);
-            else update_post_meta ($post_id, 'partner-attribut-phone3', '');
+            $partner_property_phone3 = sanitize_text_field($_POST['property-phone3']);
+            if (!empty($partner_property_phone3)) update_post_meta ($post_id, 'property-phone3', $partner_property_phone3);
+            else update_post_meta ($post_id, 'property-phone3', '');
             
             // Update Partner Attribut : Fax
-            $partner_attribut_fax = sanitize_text_field($_POST['partner-attribut-fax']);
-            if (!empty($partner_attribut_fax)) update_post_meta ($post_id, 'partner-attribut-fax', $partner_attribut_fax);
-            else update_post_meta ($post_id, 'partner-attribut-fax', '');
+            $partner_property_fax = sanitize_text_field($_POST['property-fax']);
+            if (!empty($partner_property_fax)) update_post_meta ($post_id, 'property-fax', $partner_property_fax);
+            else update_post_meta ($post_id, 'property-fax', '');
             
             // Update Partner Attribut : Email
-            $partner_attribut_email = sanitize_text_field($_POST['partner-attribut-email']);
-            if (!empty($partner_attribut_email)) update_post_meta ($post_id, 'partner-attribut-email', $partner_attribut_email);
-            else update_post_meta ($post_id, 'partner-attribut-email', '');
+            $partner_property_email = sanitize_text_field($_POST['property-email']);
+            if (!empty($partner_property_email)) update_post_meta ($post_id, 'property-email', $partner_property_email);
+            else update_post_meta ($post_id, 'property-email', '');
             
             // Update Partner Attribut : Email 2
-            $partner_attribut_email2 = sanitize_text_field($_POST['partner-attribut-email2']);
-            if (!empty($partner_attribut_email2)) update_post_meta ($post_id, 'partner-attribut-email2', $partner_attribut_email2);
-            else update_post_meta ($post_id, 'partner-attribut-email2', '');
+            $partner_property_email2 = sanitize_text_field($_POST['property-email2']);
+            if (!empty($partner_property_email2)) update_post_meta ($post_id, 'property-email2', $partner_property_email2);
+            else update_post_meta ($post_id, 'property-email2', '');
             
             // Update Partner Attribut : Website
-            $partner_attribut_website = sanitize_text_field($_POST['partner-attribut-website']);
-            if (!empty($partner_attribut_website)) update_post_meta ($post_id, 'partner-attribut-website', $partner_attribut_website);
-            else update_post_meta ($post_id, 'partner-attribut-website', '');
+            $partner_property_website = sanitize_text_field($_POST['property-website']);
+            if (!empty($partner_property_website)) update_post_meta ($post_id, 'property-website', $partner_property_website);
+            else update_post_meta ($post_id, 'property-website', '');
             
             // Update Partner Attribut : Latitude
-            $partner_attribut_latitude = sanitize_text_field($_POST['partner-attribut-latitude']);
-            if (!empty($partner_attribut_latitude)) update_post_meta ($post_id, 'partner-attribut-latitude', $partner_attribut_latitude);
-            else update_post_meta ($post_id, 'partner-attribut-latitude', '');
+            $partner_property_latitude = sanitize_text_field($_POST['property-latitude']);
+            if (!empty($partner_property_latitude)) update_post_meta ($post_id, 'property-latitude', $partner_property_latitude);
+            else update_post_meta ($post_id, 'property-latitude', '');
             
             // Update Partner Attribut : Longitude
-            $partner_attribut_longitude = sanitize_text_field($_POST['partner-attribut-longitude']);
-            if (!empty($partner_attribut_longitude)) update_post_meta ($post_id, 'partner-attribut-longitude', $partner_attribut_longitude);
-            else update_post_meta ($post_id, 'partner-attribut-longitude', '');
+            $partner_property_longitude = sanitize_text_field($_POST['property-longitude']);
+            if (!empty($partner_property_longitude)) update_post_meta ($post_id, 'property-longitude', $partner_property_longitude);
+            else update_post_meta ($post_id, 'property-longitude', '');
         }
     
         /**
-        * Partner Add Columns
+        * Partner Posts List : Insert Custom Columns
         * @param type $columns
         */
         function partner_add_columns($columns){
@@ -244,7 +244,7 @@ if (!class_exists('LS_Manager_Partner')) {
         }
         
         /**
-        * Partner Custom Column Render
+        * Partner Posts List : Custom Columns Render
         * @param type $column_name
         * @param type $post_id 
         */
@@ -258,24 +258,24 @@ if (!class_exists('LS_Manager_Partner')) {
                 break;
                 case 'partner' :    
                     // Get Partenaire Summary
-                    $partner_attribut_owner        = get_post_meta($post_id, 'partner-attribut-owner', true);
-                    $partner_attribut_address      = get_post_meta($post_id, 'partner-attribut-address', true);
-                    $partner_attribut_zip_code     = get_post_meta($post_id, 'partner-attribut-zip-code', true);
-                    $partner_attribut_city         = get_post_meta($post_id, 'partner-attribut-city', true);
-                    $partner_attribut_country      = get_post_meta($post_id, 'partner-attribut-country', true);
-                    $partner_attribut_phone        = get_post_meta($post_id, 'partner-attribut-phone', true);
-                    $partner_attribut_email        = get_post_meta($post_id, 'partner-attribut-email', true);
+                    $partner_property_owner        = get_post_meta($post_id, 'property-owner', true);
+                    $partner_property_address      = get_post_meta($post_id, 'property-address', true);
+                    $partner_property_zip_code     = get_post_meta($post_id, 'property-zip-code', true);
+                    $partner_property_city         = get_post_meta($post_id, 'property-city', true);
+                    $partner_property_country      = get_post_meta($post_id, 'property-country', true);
+                    $partner_property_phone        = get_post_meta($post_id, 'property-phone', true);
+                    $partner_property_email        = get_post_meta($post_id, 'property-email', true);
                     // Display Partenaire Summary
-                    if (!empty($partner_attribut_owner))
-                        echo $partner_attribut_owner . '<br />';
-                    if (!empty($partner_attribut_address) && !empty($partner_attribut_zip_code) && !empty($partner_attribut_city))
-                        echo $partner_attribut_address . '<br />' . $partner_attribut_zip_code . ' ' . $partner_attribut_city . '<br />';
-                    if (!empty($partner_attribut_country))
-                        echo $partner_attribut_country . '<br />';
-                    if (!empty($partner_attribut_phone))
-                        echo $partner_attribut_phone . '<br />';
-                    if (!empty($partner_attribut_email))
-                        echo $partner_attribut_email . '<br />';
+                    if (!empty($partner_property_owner))
+                        echo $partner_property_owner . '<br />';
+                    if (!empty($partner_property_address) && !empty($partner_property_zip_code) && !empty($partner_property_city))
+                        echo $partner_property_address . '<br />' . $partner_property_zip_code . ' ' . $partner_property_city . '<br />';
+                    if (!empty($partner_property_country))
+                        echo $partner_property_country . '<br />';
+                    if (!empty($partner_property_phone))
+                        echo $partner_property_phone . '<br />';
+                    if (!empty($partner_property_email))
+                        echo $partner_property_email . '<br />';
                 break;
             }
         }
