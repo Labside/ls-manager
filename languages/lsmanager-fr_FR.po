@@ -55,6 +55,37 @@ msgstr "Editer"
 msgid "Parent"
 msgstr "Parent"
 
+# : Custom Post Type Enterprise
+msgid "Enterprises listing"
+msgstr "Liste des entreprises"
+
+msgid "Enterprises"
+msgstr "Entreprises"
+
+msgid "Enterprise"
+msgstr "Entreprise"
+
+msgid "New enterprise"
+msgstr "Nouvelle entreprise"
+
+msgid "Add a new enterprise"
+msgstr "Ajouter une entreprise"
+
+msgid "Edit enterprise"
+msgstr "Editer l'entreprise"
+
+msgid "View enterprise"
+msgstr "Voir l'entreprise"
+
+msgid "Search enterprise"
+msgstr "Chercher une entreprise"
+
+msgid "No enterprise found"
+msgstr "Aucune entreprise trouvée"
+
+msgid "No enterprise found in trash"
+msgstr "Aucune entreprise trouvée dans la corbeille"
+
 # : Custom Post Type Partner
 msgid "Partners listing"
 msgstr "Liste des partenaires"
