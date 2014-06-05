@@ -18,6 +18,7 @@ if (!class_exists('LS_Manager')) {
         public $ls_manager_project    = null;
         public $ls_manager_prospect   = null;
         public $ls_manager_customer   = null;
+        public $ls_manager_quote      = null;
         
         /** 
          * Construct the plugin main object 
@@ -66,6 +67,9 @@ if (!class_exists('LS_Manager')) {
             
             // Load Customer Post Type
             $this->ls_manager_customer    = new LS_Manager_Customer();
+            
+            // Load Quote Post Type
+            $this->ls_manager_quote    = new LS_Manager_Quote();
             
             // Load Js Files
             add_action('admin_enqueue_scripts',array(&$this,'admin_js'));
