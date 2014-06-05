@@ -86,6 +86,18 @@ msgstr "Aucune entreprise trouvée"
 msgid "No enterprise found in trash"
 msgstr "Aucune entreprise trouvée dans la corbeille"
 
+msgid "Price"
+msgstr "Prix"
+
+msgid "Price per hours"
+msgstr "Tarif horaire"
+
+msgid "Hours per day"
+msgstr "Heures par jour"
+
+msgid "Price tax"
+msgstr "Taxes"
+
 # : Custom Post Type Partner
 msgid "Partners listing"
 msgstr "Liste des partenaires"
@@ -260,3 +272,34 @@ msgstr "Aucun projet trouvé"
 
 msgid "No project found in trash"
 msgstr "Aucun projet trouvé dans la corbeille"
+
+# : Custom Post Type Quote
+msgid "Quotes listing"
+msgstr "Liste des projets"
+
+msgid "Quotes"
+msgstr "Devis"
+
+msgid "Quote"
+msgstr "Devis"
+
+msgid "New quote"
+msgstr "Nouveau devis"
+
+msgid "Add a new quote"
+msgstr "Ajouter un devis"
+
+msgid "Edit quote"
+msgstr "Editer le devis"
+
+msgid "View quote"
+msgstr "Voir le devis"
+
+msgid "Search quote"
+msgstr "Chercher un devis"
+
+msgid "No quote found"
+msgstr "Aucun devis trouvé"
+
+msgid "No quote found in trash"
+msgstr "Aucun devis trouvé dans la corbeille"
