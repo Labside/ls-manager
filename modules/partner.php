@@ -24,6 +24,10 @@ if (!class_exists('LS_Manager_Partner')) {
             add_meta_box('partner-infos-box', 'Informations détaillées', array(&$this,'partner_properties_render'), 'partner', 'normal', 'high');
             add_action('save_post', array(&$this,'partner_properties_save_postdata'));
             
+            // Enterprise Association MetaBox + Save Data
+            add_meta_box('enterprise-association-box', 'Entreprise associée', array(&$this,'enterprise_association_render'), 'partner', 'side', 'high');
+            add_action('save_post', array(&$this,'enterprise_association_save_postdata'));
+            
             // Partner Custom Columns In Post Type List
             add_filter( 'manage_edit-partner_columns', array(&$this,'partner_add_columns') ) ;
             add_action( 'manage_partner_posts_custom_column', array(&$this,'partner_add_custom_columns_render'), 10, 2);
@@ -221,7 +225,57 @@ if (!class_exists('LS_Manager_Partner')) {
             if (!empty($partner_property_longitude)) update_post_meta ($post_id, 'property-longitude', $partner_property_longitude);
             else update_post_meta ($post_id, 'property-longitude', '');
         }
-    
+        
+        /**
+         * Render Meta Box : Associate Partner To Existing Enterprise 
+         * @global type $ls_manager
+         * @global type $post 
+         */
+        public function enterprise_association_render(){
+            global $ls_manager, $post;
+            
+            // Get Enterprise Association Post Meta
+            $enterprise_association_id = get_post_meta($post->ID, 'enterprise-association-id', true);
+            
+            // Use nonce for verification            
+            echo '<input type="hidden" name="enterprise_association_metabox_nonce" value="'. wp_create_nonce('enterprise_association_metabox'). '" />';
+            
+            // Display Dropdown List
+            echo '<select id="enterprise-association-id" name="enterprise-association-id" >';
+            echo '  <option value=""> -- </option>';
+            // Get List Of Enterprise
+            $args = array('post_type' => 'enterprise', 'posts_per_page' => '-1', 'post_status' => 'publish', 'orderby' => 'title');
+            $enterprise_collection = get_posts($args);
+            if (sizeof($enterprise_collection) > 0){
+                foreach($enterprise_collection as $enterprise){
+                    $selected = $enterprise->ID == $enterprise_association_id ? 'selected="selected"' : '';
+                    echo '  <option value="'.$enterprise->ID.'" '.$selected.'>'.$enterprise->post_title.'</option>';
+                }
+            }
+            echo '</select>';
+            
+        }
+        
+        /**
+         * Save Postdata : Associate Partner To Existing Enterprise 
+         * @param type $post_id
+         * @return type 
+         */
+        public function enterprise_association_save_postdata($post_id){
+            
+            // Check Nonce
+            if (!wp_verify_nonce($_POST['enterprise_association_metabox_nonce'], 'enterprise_association_metabox'))
+                return $post_id;
+
+            // Check Autosave
+            if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
+            
+            // Update Post Meta Value
+            $enterprise_association_id = sanitize_text_field($_POST['enterprise-association-id']);
+            if (!empty($enterprise_association_id)) update_post_meta($post_id, 'enterprise-association-id',$enterprise_association_id);
+            else update_post_meta($post_id, 'enterprise-association-id', '');
+        }
+        
         /**
         * Partner Posts List : Insert Custom Columns
         * @param type $columns
