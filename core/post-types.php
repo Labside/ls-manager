@@ -239,7 +239,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
                         'exclude_from_search' => false, 
                         'menu_position' => 25, 
                         'query_var' => true,
-                        'supports' => array( 'title', 'editor', 'thumbnail' ), 
+                        'supports' => array( 'title', 'thumbnail' ), 
                         'taxonomies' => array(),
                         'rewrite' => true, 
                         'capability_type' => 'post', 
