@@ -1,11 +1,11 @@
 <?php
 
-if (!class_exists('LS_Manager_Post_Types')) {
+if (!class_exists('LS_Manager_CPT')) {
     
     /**
-     * LS_Manager_Post_Types - Object Class 
+     * LS_Manager_CPT - Object Class 
      */
-    class LS_Manager_Post_Types{
+    class LS_Manager_CPT{
         
         /** 
          * Construct the plugin object 
@@ -221,7 +221,7 @@ if (!class_exists('LS_Manager_Post_Types')) {
                 'edit'               => __('Edit',$ls_manager->ls_manager_domain), 
                 'edit_item'          => __('Edit quote',$ls_manager->ls_manager_domain),
                 'new_item'           => __('New quote',$ls_manager->ls_manager_domain), 
-                'view'               => __('Customers',$ls_manager->ls_manager_domain), 
+                'view'               => __('Quotes',$ls_manager->ls_manager_domain), 
                 'view_item'          => __('View quote',$ls_manager->ls_manager_domain),
                 'search_items'       => __('Search quote',$ls_manager->ls_manager_domain),
                 'not_found'          => __('No quote found',$ls_manager->ls_manager_domain), 
@@ -239,7 +239,42 @@ if (!class_exists('LS_Manager_Post_Types')) {
                         'exclude_from_search' => false, 
                         'menu_position' => 25, 
                         'query_var' => true,
-                        'supports' => array( 'title', 'thumbnail' ), 
+                        'supports' => array( 'title' ), 
+                        'taxonomies' => array(),
+                        'rewrite' => true, 
+                        'capability_type' => 'post', 
+                        'hierachical' => false,
+                        /*'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-customer.png',*/
+                )
+            );
+            // Post Type : Invoice
+            $labels = array(
+                'name'               => __('Invoices',$ls_manager->ls_manager_domain),
+                'singular_name'      => __('Invoice',$ls_manager->ls_manager_domain), 
+                'add_new'            => __('New invoice',$ls_manager->ls_manager_domain),
+                'add_new_item'       => __('Add a new invoice',$ls_manager->ls_manager_domain), 
+                'edit'               => __('Edit',$ls_manager->ls_manager_domain), 
+                'edit_item'          => __('Edit invoice',$ls_manager->ls_manager_domain),
+                'new_item'           => __('New invoice',$ls_manager->ls_manager_domain), 
+                'view'               => __('Invoices',$ls_manager->ls_manager_domain), 
+                'view_item'          => __('View invoice',$ls_manager->ls_manager_domain),
+                'search_items'       => __('Search invoice',$ls_manager->ls_manager_domain),
+                'not_found'          => __('No invoice found',$ls_manager->ls_manager_domain), 
+                'not_found_in_trash' => __('No invoice found in trash',$ls_manager->ls_manager_domain),
+                'parent'             => __('Parent',$ls_manager->ls_manager_domain)
+            );
+            
+            register_post_type( 
+                'invoice', 
+                array(  'labels' => $labels,
+                        'description' => __('Invoices listing',$ls_manager->ls_manager_domain), 
+                        'public' => true, 
+                        'publicly_queryable' => true,
+                        'show_ui' => true, 
+                        'exclude_from_search' => false, 
+                        'menu_position' => 25, 
+                        'query_var' => true,
+                        'supports' => array( 'title' ), 
                         'taxonomies' => array(),
                         'rewrite' => true, 
                         'capability_type' => 'post', 

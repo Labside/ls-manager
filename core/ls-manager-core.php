@@ -12,13 +12,14 @@ if (!class_exists('LS_Manager')) {
         var $options_group            = 'ls_manager_'; // Prefix to all options
         
 	public $ls_manager_settings   = null;
-        public $ls_manager_post_types = null;
+        public $ls_manager_cpt        = null;
         public $ls_manager_enterprise = null;
         public $ls_manager_partner    = null;
         public $ls_manager_project    = null;
         public $ls_manager_prospect   = null;
         public $ls_manager_customer   = null;
         public $ls_manager_quote      = null;
+        public $ls_manager_invoice    = null;
         
         /** 
          * Construct the plugin main object 
@@ -51,7 +52,7 @@ if (!class_exists('LS_Manager')) {
         public function init(){
             
             // Load Post Types Builder
-            $this->ls_manager_post_types = new LS_Manager_Post_Types();
+            $this->ls_manager_cpt        = new LS_Manager_CPT();
             
             // Load Enterprise Post Type
             $this->ls_manager_enterprise = new LS_Manager_Enterprise();
@@ -63,13 +64,16 @@ if (!class_exists('LS_Manager')) {
             //$this->ls_manager_project    = new LS_Manager_Project();
             
             // Load Prospect Post Type
-            $this->ls_manager_prospect    = new LS_Manager_Prospect();
+            $this->ls_manager_prospect   = new LS_Manager_Prospect();
             
             // Load Customer Post Type
-            $this->ls_manager_customer    = new LS_Manager_Customer();
+            $this->ls_manager_customer   = new LS_Manager_Customer();
             
             // Load Quote Post Type
-            $this->ls_manager_quote    = new LS_Manager_Quote();
+            $this->ls_manager_quote      = new LS_Manager_Quote();
+            
+            // Load Quote Post Type
+            $this->ls_manager_invoice    = new LS_Manager_Invoice();
             
             // Load Js Files
             add_action('admin_enqueue_scripts',array(&$this,'admin_js'));
@@ -93,6 +97,7 @@ if (!class_exists('LS_Manager')) {
         public function admin_js() {
             global $ls_manager_globals;
             wp_register_script('ls-manager-js', $ls_manager_globals['plugin_url'] . 'js/ls-manager.js', array('jquery'), self::$ls_manager_version, false );
+            wp_localize_script('ls-manager-js', 'lsAjax', array('ajaxurl' => admin_url( 'admin-ajax.php' )));
             wp_enqueue_script('ls-manager-js');
             return;
         }
