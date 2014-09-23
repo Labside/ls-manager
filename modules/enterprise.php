@@ -42,6 +42,7 @@ if (!class_exists('LS_Manager_Enterprise')) {
             
             // Get Post Meta Key 
             $enterprise_property_owner        = get_post_meta($post->ID, 'property-owner', true);
+            $enterprise_property_job          = get_post_meta($post->ID, 'property-job', true);
             $enterprise_property_address      = get_post_meta($post->ID, 'property-address', true);
             $enterprise_property_zip_code     = get_post_meta($post->ID, 'property-zip-code', true);
             $enterprise_property_city         = get_post_meta($post->ID, 'property-city', true);
@@ -53,6 +54,7 @@ if (!class_exists('LS_Manager_Enterprise')) {
             $enterprise_property_email        = get_post_meta($post->ID, 'property-email', true);
             $enterprise_property_email2       = get_post_meta($post->ID, 'property-email2', true);
             $enterprise_property_website      = get_post_meta($post->ID, 'property-website', true);
+            $enterprise_property_legal_number = get_post_meta($post->ID, 'property-legal-number', true);
             $enterprise_property_latitude     = get_post_meta($post->ID, 'property-latitude', true);
             $enterprise_property_longitude    = get_post_meta($post->ID, 'property-longitude', true);
             
@@ -62,6 +64,10 @@ if (!class_exists('LS_Manager_Enterprise')) {
             // Owner
             echo '<label style="width:25%;display:block;float:left;">'.__('Owner', $ls_manager->ls_manager_domain).'</label>';
             echo '<input type="text" name="property-owner" id="property-owner" value="'.$enterprise_property_owner.'" style="width:70%;" /><br />';
+            
+            // Job
+            echo '<label style="width:25%;display:block;float:left;">'.__('Job', $ls_manager->ls_manager_domain).'</label>';
+            echo '<input type="text" name="property-job" id="property-job" value="'.$enterprise_property_job.'" style="width:70%;" /><br />';
             
             // Adresse
             echo '<label style="width:25%;display:block;float:left;">'.__('Address', $ls_manager->ls_manager_domain).'</label>';
@@ -107,6 +113,10 @@ if (!class_exists('LS_Manager_Enterprise')) {
             echo '<label style="width:25%;display:block;float:left;">'.__('Website', $ls_manager->ls_manager_domain).'</label>';
             echo '<input type="text" name="property-website" id="property-website" value="'.$enterprise_property_website.'" style="width:70%;" /><br />';
             
+            // Legal Number (SIRET)
+            echo '<label style="width:25%;display:block;float:left;">'.__('SIRET', $ls_manager->ls_manager_domain).'</label>';
+            echo '<input type="text" name="property-legal-number" id="property-legal-number" value="'.$enterprise_property_legal_number.'" style="width:70%;" /><br />';
+            
             // Latitude
             echo '<label style="width:25%;display:block;float:left;">'.__('Latitude', $ls_manager->ls_manager_domain).'</label>';
             echo '<input type="text" name="property-latitude" id="property-latitude" value="'.$enterprise_property_latitude.'" style="width:70%;" /><br />';
@@ -135,6 +145,11 @@ if (!class_exists('LS_Manager_Enterprise')) {
             $enterprise_property_owner = sanitize_text_field($_POST['property-owner']);
             if (!empty($enterprise_property_owner)) update_post_meta ($post_id, 'property-owner', $enterprise_property_owner);
             else update_post_meta ($post_id, 'property-owner', '');
+            
+            // Update Enterprise Property : Job
+            $enterprise_property_job = sanitize_text_field($_POST['property-job']);
+            if (!empty($enterprise_property_job)) update_post_meta ($post_id, 'property-job', $enterprise_property_job);
+            else update_post_meta ($post_id, 'property-job', '');
             
             // Update Enterprise Property : Address
             $enterprise_property_address = sanitize_text_field($_POST['property-address']);
@@ -190,6 +205,11 @@ if (!class_exists('LS_Manager_Enterprise')) {
             $enterprise_property_website = sanitize_text_field($_POST['property-website']);
             if (!empty($enterprise_property_website)) update_post_meta ($post_id, 'property-website', $enterprise_property_website);
             else update_post_meta ($post_id, 'property-website', '');
+            
+            // Update Enterprise Property : Legal Number (SIRET)
+            $enterprise_property_legal_number = sanitize_text_field($_POST['property-legal-number']);
+            if (!empty($enterprise_property_legal_number)) update_post_meta ($post_id, 'property-legal-number', $enterprise_property_legal_number);
+            else update_post_meta ($post_id, 'property-legal-number', '');
             
             // Update Enterprise Property : Latitude
             $enterprise_property_latitude = sanitize_text_field($_POST['property-latitude']);
