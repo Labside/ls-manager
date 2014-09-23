@@ -28,17 +28,18 @@ define( 'LS_MANAGER_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__) );
 define( 'LS_MANAGER_PLUGIN_DIR_URL',  plugin_dir_url(__FILE__) );
 
 // Load Libs Dependencies
-//require_once( LS_MANAGER_PLUGIN_DIR_PATH . 'libs/tcpdf/tcpdf.php' );
+require_once( LS_MANAGER_PLUGIN_DIR_PATH . 'libs/tcpdf/tcpdf.php' );
 
 include( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-core.php');
-//include( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-pdf.php');
-require( LS_MANAGER_PLUGIN_DIR_PATH . 'core/post-types.php' );
+include( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-pdf.php');
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'core/ls-manager-cpt.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/enterprise.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/partner.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/project.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/prospect.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/customer.php' );
 require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/quote.php' );
+require( LS_MANAGER_PLUGIN_DIR_PATH . 'modules/invoice.php' );
 
 
 
