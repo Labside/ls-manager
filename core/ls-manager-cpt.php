@@ -349,10 +349,8 @@ if (!class_exists('LS_Manager_CPT')) {
     * Override Walker Category DropDown : Use Slug As Value In Options 
     */
     class Type_Slug_Walker extends Walker_CategoryDropdown {   
-        /**
-        * Override start_el native function
-        */
-        function start_el( &$output, $category, $depth, $args, $id = 0 ) {
+        
+        public function start_el( &$output, $category, $depth =0, $args = array(), $id = 0 ) {
 
             $pad = str_repeat('&nbsp;', $depth * 3);
             $output .= "\t<option class=\"level-$depth\" value=\"".$category->slug."\"";
