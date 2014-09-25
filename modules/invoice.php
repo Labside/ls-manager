@@ -241,6 +241,7 @@ if (!class_exists('LS_Manager_Invoice')) {
             update_post_meta($post_id,'invoice-items', $invoice_items);
             
             $invoice_builder_row_render = '';
+            $invoice_builder_footer_render = '';
             $count = 0;
             $total_amount = 0;
             
@@ -301,6 +302,7 @@ if (!class_exists('LS_Manager_Invoice')) {
             $invoice_items = get_post_meta($post_id, 'invoice-items', true);
             
             $invoice_builder_row_render = '';
+            $invoice_builder_footer_render = '';
             
             if (!empty($invoice_items) && sizeof($invoice_items) > 0){
                 $count = 0;
