@@ -244,7 +244,7 @@ if (!class_exists('LS_Manager_CPT')) {
                         'rewrite' => true, 
                         'capability_type' => 'post', 
                         'hierachical' => false,
-                        /*'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-customer.png',*/
+                        'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-quote.png',
                 )
             );
             // Post Type : Invoice
@@ -279,7 +279,7 @@ if (!class_exists('LS_Manager_CPT')) {
                         'rewrite' => true, 
                         'capability_type' => 'post', 
                         'hierachical' => false,
-                        /*'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-customer.png',*/
+                        'menu_icon' => $ls_manager_globals['plugin_url'] .'/img/icon-invoice.png',
                 )
             );
         }
