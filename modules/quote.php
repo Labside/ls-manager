@@ -58,7 +58,7 @@ if (!class_exists('LS_Manager_Quote')) {
                     
             // Enterprise
             echo '<fieldset class="quote-builder">';
-                echo '<h4>Expéditeur :</h4>';
+                echo '<h4>'.__('Sender', $ls_manager->ls_manager_domain).' :</h4>';
                 // Choose An Enterprise
                 $current_enterprise_id = get_post_meta($post->ID, 'quote-enterprise-id', true);
                 $args = array('post_type' => 'enterprise', 'posts_per_page' => '-1' , 'order' => 'ASC', 'orderby' => 'title');
@@ -74,7 +74,7 @@ if (!class_exists('LS_Manager_Quote')) {
             // Destinataire
             $current_dest_id = get_post_meta($post->ID, 'quote-dest-id', true);
             echo '<fieldset class="quote-builder">';
-                echo '<h4>Destinataire :</h4>';
+                echo '<h4>'.__('Receiver', $ls_manager->ls_manager_domain).' :</h4>';
                 $a_list_post_type = array('partner' => 'Partners', 'prospect' => 'Prospect', 'customer' => 'Customer');
                 echo '<select id="quote-dest-id" name="quote-dest-id" style="width:70%" >';
                 echo '  <option value="0"> --- </option>';
@@ -91,7 +91,7 @@ if (!class_exists('LS_Manager_Quote')) {
             echo '</fieldset>';
             
             echo '<fieldset class="quote-builder">';
-                echo '<h4>Objet du devis :</h4>';
+                echo '<h4>'.__('Quote object', $ls_manager->ls_manager_domain).' :</h4>';
                 // Quote Main Title
                 $quote_main_title = get_post_meta($post->ID, 'quote-main-title', true);
                 echo '<input type="text" id="quote-main-title" name="quote-main-title" style="width:70%" value="'.$quote_main_title.'" /><br />';
@@ -104,16 +104,16 @@ if (!class_exists('LS_Manager_Quote')) {
             echo '<fieldset class="quote-builder">';
                 // Quote Table Results
                 echo '<fieldset class="quote-builder">';
-                    echo '<h4>Eléments existants :</h4><br class="clear" />';
+                    echo '<h4>'.__('Existing items', $ls_manager->ls_manager_domain).' :</h4><br class="clear" />';
                     echo '<table id="quote-item-table" class="widefat">';
                     echo ' <thead>';
                     echo '    <tr>';
-                    echo '        <th style="width:30%">Titre</th>';
-                    echo '        <th style="width:30%">Description</th>';       
-                    echo '        <th style="width:10%">Jours</th>';
-                    echo '        <th style="width:10%">Prix unitaire</th>';
-                    echo '        <th style="width:10%">Total</th>';
-                    echo '        <th style="width:10%">Actions</th>';
+                    echo '        <th style="width:30%">'.__('Title', $ls_manager->ls_manager_domain).'</th>';
+                    echo '        <th style="width:30%">'.__('Description', $ls_manager->ls_manager_domain).'</th>';       
+                    echo '        <th style="width:10%;text-align:right;">'.__('Days', $ls_manager->ls_manager_domain).'</th>';
+                    echo '        <th style="width:10%;text-align:right;">'.__('Unique price', $ls_manager->ls_manager_domain).'</th>';
+                    echo '        <th style="width:10%;text-align:right;">'.__('Total', $ls_manager->ls_manager_domain).'</th>';
+                    echo '        <th style="width:10%;text-align:right;">'.__('Actions', $ls_manager->ls_manager_domain).'</th>';
                     echo '    </tr>';
                     echo ' </thead>';
 
@@ -131,12 +131,12 @@ if (!class_exists('LS_Manager_Quote')) {
                             echo '  <tr class="line">';
                             echo '    <td>'.$quote_item[0].'</td>';
                             echo '    <td>'.$quote_item[1].'</td>';
-                            echo '    <td>'.$quote_item[2].'</td>';
+                            echo '    <td style="text-align:right;">'.$quote_item[2].'</td>';
                             echo '    <td style="text-align:right;">'.$quote_item[3].' €</td>';
                             echo '    <td style="text-align:right;">'.((float)$quote_item[2]*(float)$quote_item[3]).' €</td>';
                             $nonce = wp_create_nonce('quote_builder_remove_item');
                             $link = admin_url('admin-ajax.php?action=quote_builder_remove_item&post_id='.$post->ID.'&nonce='.$nonce);
-                            echo '  <td><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post->ID.'" data-nonce="'.$nonce.'" >
+                            echo '  <td style="text-align:right;"><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post->ID.'" data-nonce="'.$nonce.'" >
                                     <img src="'.  plugins_url('/ls-manager/img/icon-delete.png').'" title="Supprimer la ligne" alt="Supprimer la ligne" />
                                     </a><span class="spinner" style="display:none;float:left;"></span></td>';
                             echo '  </tr>';
@@ -244,6 +244,7 @@ if (!class_exists('LS_Manager_Quote')) {
             update_post_meta($post_id,'quote-items', $quote_items);
             
             $quote_builder_row_render = '';
+            $quote_builder_footer_render = '';
             $count = 0;
             $total_amount = 0;
             
@@ -252,12 +253,12 @@ if (!class_exists('LS_Manager_Quote')) {
                 $quote_builder_row_render .= '<tr class="line">';
                 $quote_builder_row_render .= '  <td>'.$item[0].' </td>';
                 $quote_builder_row_render .= '  <td>'.$item[1].' </td>';
-                $quote_builder_row_render .= '  <td>'.$item[2].' </td>';
+                $quote_builder_row_render .= '  <td style="text-align:right;">'.$item[2].' </td>';
                 $quote_builder_row_render .= '  <td style="text-align:right;">'.$item[3].' €</td>';
                 $quote_builder_row_render .= '  <td style="text-align:right;">'.((float)$item[2]*(float)$item[3]).' €</td>';
                 $nonce = wp_create_nonce('quote_builder_remove_item');
                 $link = admin_url('admin-ajax.php?action=quote_builder_add_item&post_id='.$post_id.'&nonce='.$nonce);
-                $quote_builder_row_render .= '  <td><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" >
+                $quote_builder_row_render .= '  <td style="text-align:right;"><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" >
                         <img src="'.  plugins_url('/ls-manager/img/icon-delete.png').'" title="Supprimer la ligne" alt="Supprimer la ligne" />
                         </a><span class="spinner" style="display:none;float:left;"></span></td>';
                 $quote_builder_row_render .= '</tr>';
@@ -304,6 +305,7 @@ if (!class_exists('LS_Manager_Quote')) {
             $quote_items = get_post_meta($post_id, 'quote-items', true);
             
             $quote_builder_row_render = '';
+            $quote_builder_footer_render = '';
             
             if (!empty($quote_items) && sizeof($quote_items) > 0){
                 $count = 0;
@@ -312,12 +314,12 @@ if (!class_exists('LS_Manager_Quote')) {
                     $quote_builder_row_render .= '<tr class="line">';
                     $quote_builder_row_render .= '  <td>'.$item[0].' </td>';
                     $quote_builder_row_render .= '  <td>'.$item[1].' </td>';
-                    $quote_builder_row_render .= '  <td>'.$item[2].' </td>';
+                    $quote_builder_row_render .= '  <td style="text-align:right;">'.$item[2].' </td>';
                     $quote_builder_row_render .= '  <td style="text-align:right;">'.$item[3].' €</td>';
                     $quote_builder_row_render .= '  <td style="text-align:right;">'.((float)$item[2]*(float)$item[3]).' €</td>';
                     $nonce = wp_create_nonce('quote_builder_remove_item');
                     $link = admin_url('admin-ajax.php?action=quote_builder_add_item&post_id='.$post_id.'&nonce='.$nonce);
-                    $quote_builder_row_render .= '  <td><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" >
+                    $quote_builder_row_render .= '  <td style="text-align:right;"><a class="remove-quote-item" href="'.$link.'" data-line="'.$count.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" >
                             <img src="'.  plugins_url('/ls-manager/img/icon-delete.png').'" title="Supprimer la ligne" alt="Supprimer la ligne" />
                             </a><span class="spinner" style="display:none;float:left;"></span></td>';
                     $quote_builder_row_render .= '</tr>';
@@ -355,14 +357,14 @@ if (!class_exists('LS_Manager_Quote')) {
         }
         
         /**
-         * Quote To Invoice : Save Postdata
+         * Ajax Quote To Invoice Process
          */
         public function quote_to_invoice_process(){
             // Verify Nonce
             if ( !wp_verify_nonce( $_REQUEST['nonce'], 'quote_to_invoice')) exit();
             
             // Get Posted Values
-            $post_id = $_REQUEST["post_id"];
+            $post_id = $_REQUEST['post_id'];
             
             // Get Quote Meta Values
             $current_enterprise_id = get_post_meta($post_id, 'quote-enterprise-id', true);
