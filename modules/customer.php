@@ -22,6 +22,10 @@ if (!class_exists('LS_Manager_Customer')) {
             // Customer Infos MetaBox + Save Data
             add_meta_box('customer-infos-box', 'Informations détaillées', array(&$this,'customer_infos_render'), 'customer', 'normal', 'high');
             add_action('save_post', array(&$this,'customer_infos_save_postdata'));
+            
+            // Customer Custom Columns In Post Type List
+            add_filter( 'manage_edit-customer_columns', array(&$this,'customer_add_columns') ) ;
+            add_action( 'manage_customer_posts_custom_column', array(&$this,'customer_add_custom_columns_render'), 10, 2);
         }
         
         /**
@@ -191,6 +195,64 @@ if (!class_exists('LS_Manager_Customer')) {
             $customer_property_longitude = sanitize_text_field($_POST['property-longitude']);
             if (!empty($customer_property_longitude)) update_post_meta ($post_id, 'property-longitude', $customer_property_longitude);
             else update_post_meta ($post_id, 'property-longitude', '');
+        }
+        
+        /**
+        * Customer Posts List : Insert Custom Columns
+        * @param type $columns
+        */
+        function customer_add_columns($columns){
+            global $ls_manager;
+            $custom_columns = array();
+            foreach($columns as $key => $title) {
+                if ($key=='title') {
+                    $custom_columns['thumbnail']  = 'Logo';
+                    $custom_columns[$key]         = $title;
+                    $custom_columns['customer']    = __('Summary', $ls_manager->ls_manager_domain);
+                }
+                elseif ($key=='date'){
+                    unset($custom_columns[$key]);
+                }
+                else $custom_columns[$key] = $title;
+            }
+            return $custom_columns;
+        }
+        
+        /**
+        * Customer Posts List : Custom Columns Render
+        * @param type $column_name
+        * @param type $post_id 
+        */
+        function customer_add_custom_columns_render($column_name, $post_id){
+            switch ($column_name) {
+                case 'thumbnail' :    
+                    // Display Thumbnail
+                    $customer_thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id($post_id),'medium');
+                    if (!empty($customer_thumbnail))
+                        echo '<img src="'.$customer_thumbnail[0].'" alt="" />';
+                break;
+                case 'customer' :    
+                    // Get Partenaire Summary
+                    $customer_property_owner        = get_post_meta($post_id, 'property-owner', true);
+                    $customer_property_address      = get_post_meta($post_id, 'property-address', true);
+                    $customer_property_zip_code     = get_post_meta($post_id, 'property-zip-code', true);
+                    $customer_property_city         = get_post_meta($post_id, 'property-city', true);
+                    $customer_property_country      = get_post_meta($post_id, 'property-country', true);
+                    $customer_property_phone        = get_post_meta($post_id, 'property-phone', true);
+                    $customer_property_email        = get_post_meta($post_id, 'property-email', true);
+                    // Display Partenaire Summary
+                    if (!empty($customer_property_owner))
+                        echo $customer_property_owner . '<br />';
+                    if (!empty($customer_property_address) && !empty($customer_property_zip_code) && !empty($customer_property_city))
+                        echo $customer_property_address . '<br />' . $customer_property_zip_code . ' ' . $customer_property_city . '<br />';
+                    if (!empty($customer_property_country))
+                        echo $customer_property_country . '<br />';
+                    if (!empty($customer_property_phone))
+                        echo $customer_property_phone . '<br />';
+                    if (!empty($customer_property_email))
+                        echo $customer_property_email . '<br />';
+                break;
+            }
         }
     }
 }
